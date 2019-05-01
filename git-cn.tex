@@ -1,0 +1,175 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+\documentclass[landscape,a4paper]{cheatsheet}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{graphics}
+\usepackage{xeCJK}
+\setmainfont{Times New Roman} %缺省英文字体
+\setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi]{宋体}
+\setCJKsansfont{黑体}%serif是有衬线字体sans serif无衬线字体。
+\setmonofont{宋体} % 等寬字型
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+\setCJKfamilyfont{song}{SimSun} %宋体 song
+\newcommand{\song}{\CJKfamily{song}} % 宋体 (Windows自带simsun.ttf)
+\setCJKfamilyfont{xs}{NSimSun} %新宋体 xs
+\newcommand{\xs}{\CJKfamily{xs}}
+\setCJKfamilyfont{fs}{FangSong} %仿宋 fs
+\newcommand{\fs}{\CJKfamily{fs}} %仿宋体 (Windows自带simfs.ttf)
+\setCJKfamilyfont{kai}{KaiTi} %楷体2312 kai
+\newcommand{\kai}{\CJKfamily{kai}}
+\setCJKfamilyfont{yh}{Microsoft YaHei} %微软雅黑 yh
+\newcommand{\yh}{\CJKfamily{yh}}
+\setCJKfamilyfont{hei}{SimHei} %黑体 hei
+\newcommand{\hei}{\CJKfamily{hei}} % 黑体 (Windows自带simhei.ttf)
+\setCJKfamilyfont{msunicode}{Arial Unicode MS} %Arial Unicode MS: msunicode
+\newcommand{\msunicode}{\CJKfamily{msunicode}}
+\setCJKfamilyfont{li}{LiSu} %隶书 li
+\newcommand{\li}{\CJKfamily{li}}
+\setCJKfamilyfont{yy}{YouYuan} %幼圆 yy
+\newcommand{\yy}{\CJKfamily{yy}}
+\setCJKfamilyfont{xm}{MingLiU} %细明体 xm
+\newcommand{\xm}{\CJKfamily{xm}}
+\setCJKfamilyfont{xxm}{PMingLiU} %新细明体 xxm
+\newcommand{\xxm}{\CJKfamily{xxm}}
+
+\setCJKfamilyfont{hwsong}{STSong} %华文宋体 hwsong
+\newcommand{\hwsong}{\CJKfamily{hwsong}}
+\setCJKfamilyfont{hwzs}{STZhongsong} %华文中宋 hwzs
+\newcommand{\hwzs}{\CJKfamily{hwzs}}
+\setCJKfamilyfont{hwfs}{STFangsong} %华文仿宋 hwfs
+\newcommand{\hwfs}{\CJKfamily{hwfs}}
+\setCJKfamilyfont{hwxh}{STXihei} %华文细黑 hwxh
+\newcommand{\hwxh}{\CJKfamily{hwxh}}
+\setCJKfamilyfont{hwl}{STLiti} %华文隶书 hwl
+\newcommand{\hwl}{\CJKfamily{hwl}}
+\setCJKfamilyfont{hwxw}{STXinwei} %华文新魏 hwxw
+\newcommand{\hwxw}{\CJKfamily{hwxw}}
+\setCJKfamilyfont{hwk}{STKaiti} %华文楷体 hwk
+\newcommand{\hwk}{\CJKfamily{hwk}}
+\setCJKfamilyfont{hwxk}{STXingkai} %华文行楷 hwxk
+\newcommand{\hwxk}{\CJKfamily{hwxk}}
+\setCJKfamilyfont{hwcy}{STCaiyun} %华文彩云 hwcy
+\newcommand{\hwcy}{\CJKfamily{hwcy}}
+\setCJKfamilyfont{hwhp}{STHupo} %华文琥珀 hwhp
+\newcommand{\hwhp}{\CJKfamily{hwhp}}
+
+\setCJKfamilyfont{fzsong}{Simsun (Founder Extended)} %方正宋体超大字符集 fzsong
+\newcommand{\fzsong}{\CJKfamily{fzsong}}
+\setCJKfamilyfont{fzyao}{FZYaoTi} %方正姚体 fzy
+\newcommand{\fzyao}{\CJKfamily{fzyao}}
+\setCJKfamilyfont{fzshu}{FZShuTi} %方正舒体 fzshu
+\newcommand{\fzshu}{\CJKfamily{fzshu}}
+
+\setCJKfamilyfont{asong}{Adobe Song Std} %Adobe 宋体 asong
+\newcommand{\asong}{\CJKfamily{asong}}
+\setCJKfamilyfont{ahei}{Adobe Heiti Std} %Adobe 黑体 ahei
+\newcommand{\ahei}{\CJKfamily{ahei}}
+\setCJKfamilyfont{akai}{Adobe Kaiti Std} %Adobe 楷体 akai
+\newcommand{\akai}{\CJKfamily{akai}}
+
+\title{\texttt{Git} for gits}
+\author{A. C. Hinrichs}
+\date{\today}
+
+\newcommand{\highlight}[1]{{\textsf{\color{primaryColor}#1}}}
+\begin{document}
+\maketitle
+
+\begin{figure}[H]
+  \centering
+  \resizebox{0.75\linewidth}{!}{\includegraphics{pictures/git_2x.png}}
+  \caption{Anleitung für diese Anleitung\protect\footnotemark}
+  \label{fig:anleitung}
+\end{figure}
+\footnotetext{Quelle: \url{https://xkcd.com/1597/}}
+\section{Basis-Workflow}
+中文 \textit{中文} \textbf{中文} \hwl{中文} Ein generischer Git-workflow, ein \highlight{Repository} muss
+logischerweise nur ein mal angelegt werden, 
+\subsection{Ein \highlight{Repository} klonen}
+\begin{lstlisting}[language=bash]
+  $ git clone <REPO-URL>
+\end{lstlisting} % $ %Hack for Math-highlighting
+Git erstelt nun eine \highlight{Arbeitskopie} des entferneten
+Repos. Diese liegt anschließend in einem Unterorder des aktiven
+Verzeichnisses. 
+
+Exisitert kein entferntes Repository kann man das aktive
+verzeichniss mittels
+\begin{lstlisting}[language=bash]
+  $ git init
+\end{lstlisting} % $ %Hack for Math-highlighting
+als Repository intialisieren.
+\subsection{Einen \highlight{Branch} erstellen \& auf ihn wechseln}
+Die Entwicklung auf zwei verschiedenen Branches verläuft komplett
+unabhöngig voneinander
+\begin{lstlisting}[language=bash]
+  $ git checkout -b <NEW-BRANCHNAME>
+\end{lstlisting} % $ %Hack for Math-highlighting
+Wenn der Branch bereits existiert, kann die Option \lstinline{-b}
+weggelassen werden.
+
+Alle (lokalen) Branches kann man sich mit dem Befehl
+\begin{lstlisting}[language=bash]
+  $ git branch --list
+\end{lstlisting} % $ %Hack for Math-highlighting
+anzeigen lassen.
+\subsection{Im Repository Arbeiten}
+Wie auf einer nicht Versionierter Code-Base.
+
+Ist das Arbeitsverzeichniss im Vergleich zum letzen Commit verändert,
+so sagt man dass es \highlight{dirty}  also Schmutzig ist.
+\subsection{Änderungen \highlight{Commiten}}
+Die geänderten Dateien kann man sich mit dem Befehl 
+\begin{lstlisting}[language=bash]
+  $ git status
+\end{lstlisting} % $ %Hack for Math-highlighting
+ausgeben lassen.
+
+Um seine Änderungen zum \highlight{Index} hinzuzufügen (also dafür zu
+sorgen, dass Git sie sich merkt) nutzt man folgendes Kommando
+\begin{lstlisting}[language=bash]
+  $ git add <FILENAME>
+\end{lstlisting} % $ %Hack for Math-highlighting
+Dies funktioniert auch für Verzeichnisse. Gibt man als Dateinamen
+\lstinline{.} an, so legt Git alle Änderungen auf den Index.
+
+Man erstellt nun einen \highlight{Commit} mit dem Befehl 
+\begin{lstlisting}[language=bash]
+  $ git commit -m <COMMIT-NACHRICHT>
+\end{lstlisting} % $ %Hack for Math-highlighting
+
+\subsection{\highlight{Pushen} und \highlight{Pullen}}
+Um Änderungen aus dem entfernten Repository zu laden:
+\begin{lstlisting}[language=bash]
+  $ git pull
+\end{lstlisting} % $ %Hack for Math-highlighting
+
+Um seine Commits auf das entfernte Repo zu laden:
+\begin{lstlisting}[language=bash]
+  $ git push
+\end{lstlisting} % $ %Hack for Math-highlighting
+
+\subsection{\highlight{Mergen}}
+Git ist sehr gut darin, Änderungen zusammenzuführen, benötigt aber
+manchmal dabei Hilfe (Git wird einen darauf hinweise). Diese
+\highlight{Merge Konflikte} lassen sich mittels dem tool
+\begin{lstlisting}[language=bash]
+  $ git mergetool
+\end{lstlisting} % $ %Hack for Math-highlighting
+zusammenführen. Ich empfehle immer die Option
+\lstinline{--tool=emerge} anzugeben\footnote{um seinen Merge mit dem
+  besten Editor durchzuführen}.
+
+\subsection{Branche zusammenführen}
+Auch verschiedene Branches werden \enquote{gemerged}:
+\begin{lstlisting}[language=bash]
+  $ git checkout <ZIEL BRANCH>
+  $ git merge <QUELL BRANCH>
+\end{lstlisting} % $ %Hack for Math-highlighting
+Merged den Branch \lstinline{<QUELL BRANCH>} in den Branch
+\lstinline{<ZIEL BRANCH>}
+\end{document}
